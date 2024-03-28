@@ -1,0 +1,12 @@
+version: '3.1'
+
+services:
+  db:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: financing
+      MYSQL_DATABASE: financing
+      MYSQL_USER: financing
+      MYSQL_PASSWORD: financing
+    ports:
+      - "3306:3306"
