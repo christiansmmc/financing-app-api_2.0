@@ -47,4 +47,7 @@ public class Transaction {
     @NotNull
     @ManyToOne
     private User user;
+
+    @ManyToOne
+    private Tag tag;
 }

@@ -1,6 +1,8 @@
 package com.christian.financingapp.domain.dto.transaction;
 
+import com.christian.financingapp.domain.dto.tag.TagToCreateTransactionDTO;
 import com.christian.financingapp.domain.enumeration.TransactionType;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
@@ -12,6 +14,7 @@ public record TransactionToCreateDTO(
         String description,
         @NotNull BigDecimal value,
         @NotNull TransactionType type,
-        LocalDate date
+        LocalDate date,
+        @Valid TagToCreateTransactionDTO tag
 ) {
 }

@@ -1,5 +1,6 @@
 package com.christian.financingapp.domain.dto.transaction;
 
+import com.christian.financingapp.domain.dto.tag.TagDTO;
 import com.christian.financingapp.domain.enumeration.TransactionType;
 
 import java.math.BigDecimal;
@@ -11,6 +12,7 @@ public record TransactionToGetDTO(
         String description,
         BigDecimal value,
         TransactionType type,
-        LocalDate date
+        LocalDate date,
+        TagDTO tag
 ) {
 }

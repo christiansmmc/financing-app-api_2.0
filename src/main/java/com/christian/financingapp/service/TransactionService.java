@@ -1,5 +1,6 @@
 package com.christian.financingapp.service;
 
+import com.christian.financingapp.domain.Tag;
 import com.christian.financingapp.domain.Transaction;
 import com.christian.financingapp.domain.User;
 import com.christian.financingapp.domain.enumeration.TransactionType;
@@ -7,6 +8,7 @@ import com.christian.financingapp.domain.vm.TransactionDateResponseVM;
 import com.christian.financingapp.domain.vm.TransactionDateVM;
 import com.christian.financingapp.domain.vm.TransactionSummaryVM;
 import com.christian.financingapp.exception.EntityNotFoundException;
+import com.christian.financingapp.repository.TagRepository;
 import com.christian.financingapp.repository.TransactionRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -25,6 +27,7 @@ import java.util.stream.Collectors;
 public class TransactionService {
 
     private final TransactionRepository repository;
+    private final TagRepository tagRepository;
     private final UserService userService;
 
     public Transaction create(Transaction transaction) {
@@ -33,6 +36,13 @@ public class TransactionService {
         LocalDate transactionDate = transaction.getDate() != null
                 ? transaction.getDate()
                 : LocalDate.now();
+
+        if (transaction.getTag() != null) {
+            Tag tag = tagRepository.findById(transaction.getTag().getId())
+                    .orElseThrow();
+
+            transaction.setTag(tag);
+        }
 
         transaction.setUser(loggedUser);
         transaction.setDate(transactionDate);
